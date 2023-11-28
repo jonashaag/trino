@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -78,6 +79,23 @@ public class LocalFileSystem
         }
         catch (IOException e) {
             throw handleException(location, e);
+        }
+    }
+
+    @Override
+    public void deleteFiles(Collection<Location> locations)
+            throws IOException
+    {
+        for (var location : locations) {
+            Path filePath = toFilePath(location);
+            try {
+                Files.delete(filePath);
+            }
+            catch (IOException e) {
+                if (Files.exists(filePath)) {
+                    throw handleException(location, e);
+                }
+            }
         }
     }
 
