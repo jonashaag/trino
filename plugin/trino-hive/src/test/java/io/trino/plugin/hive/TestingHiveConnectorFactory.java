@@ -49,12 +49,6 @@ public class TestingHiveConnectorFactory
     }
 
     @Deprecated
-    public TestingHiveConnectorFactory(Path localFileSystemRootPath, HiveMetastore metastore)
-    {
-        this(localFileSystemRootPath, Optional.of(metastore), Optional.empty(), EMPTY_MODULE, Optional.empty());
-    }
-
-    @Deprecated
     public TestingHiveConnectorFactory(
             Path localFileSystemRootPath,
             Optional<HiveMetastore> metastore,
